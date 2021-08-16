@@ -66,22 +66,15 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Mô Tả Ngắn</label>
-                    <textarea class="form-control" id="bl_description_short" name="bl_description_short">{{ old('bl_description_short')}}</textarea>
-                    <script>
-                        CKEDITOR.replace( 'bl_description_short',{
-                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                            filebrowserUploadMethod: 'form'
-                        });
-                        
-                    </script>
+                    <textarea class="form-control" id="bl_description_short" rows="5" name="bl_description_short">{{ old('bl_description_short')}}</textarea>
                 </div>  
+                
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Mô Tả </label>
                     <textarea class="form-control" id="bl_description" name="bl_description">{{ old('bl_description')}}</textarea>
                     <script>
                         CKEDITOR.replace( 'bl_description',{
-                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                            filebrowserUploadMethod: 'form'
+                          
                         });
                         
                     </script>

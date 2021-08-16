@@ -1,12 +1,33 @@
 <?php
+
+// // ------------------------------register---------------------------------------
+// Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register')->name('register');
+// Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@storeUser')->name('register');
+// //Auth::routes();
+
+// // Route::group(['middleware' => 'auth:admin'], function () {
+// // });
+
+
+
+
 //BACKEND
-
-	//upload images ckeditor
-Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
-
 Route::group(['namespace' => 'backend','prefix' => 'admin'],function(){
+        // -----------------------------login-----------------------------------------
+    Route::get('/login', 'Auth\LoginBackendController@login')->name('get.backend.login');
+    Route::post('/login', 'Auth\LoginBackendController@postLogin');
+    Route::get('/logout', 'Auth\LoginBackendController@getLogout')->name('get.backend.logout');
+        // -----------------------------forget password ------------------------------
+    Route::get('forget-password', 'Auth\ForgotPasswordBackendController@getEmail')->name('get.backend.forget-password');
+    Route::post('forget-password', 'Auth\ForgotPasswordBackendController@postEmail');
+
+    Route::get('reset-password/{token}', 'Auth\ResetPasswordController@getPassword');
+    Route::post('reset-password', 'Auth\ResetPasswordController@updatePassword');
     //home
-    Route::get('','homeController@index')->name('get_backend.home');
+    Route::get('','homeController@index')->name('get_backend.home')->middleware('admin'); 
+    Route::get('returnCategory','homeController@returnCategory')->name('get_backend.home.returnCategory');
+    Route::get('chartReturnRevenueByMonth','homeController@chartReturnRevenueByMonth')->name('get_backend.home.chartReturnRevenueByMonth');
+    Route::get('chartReturnProductHotTrend','homeController@chartReturnProductHotTrend')->name('get_backend.home.chartReturnProductHotTrend');
     //category
     Route::prefix('danh-muc')->group(function(){
         Route::get('','categoryController@index')->name('get_backend.category.index');
@@ -19,6 +40,18 @@ Route::group(['namespace' => 'backend','prefix' => 'admin'],function(){
 
         Route::get('xoa/{id}','categoryController@delete')->name('get_backend.category.delete');
     });
+         //category child
+         Route::prefix('danh-muc-con')->group(function(){
+            Route::get('','categoryChildController@index')->name('get_backend.categoryChild.index');
+    
+            Route::get('them-moi','categoryChildController@create')->name('get_backend.categoryChild.create');
+            Route::post('them-moi','categoryChildController@store')->name('get_backend.categoryChild.store');
+    
+            Route::get('cap-nhat/{id}','categoryChildController@edit')->name('get_backend.categoryChild.edit');
+            Route::post('cap-nhat/{id}','categoryChildController@update')->name('get_backend.categoryChild.update');
+    
+            Route::get('xoa/{id}','categoryChildController@delete')->name('get_backend.categoryChild.delete');
+        });
      //tag
      Route::prefix('tag')->group(function(){
         Route::get('','tagController@index')->name('get_backend.tag.index');
@@ -103,5 +136,47 @@ Route::group(['namespace' => 'backend','prefix' => 'admin'],function(){
 
         Route::get('xoa/{id}','paymentController@delete')->name('get_backend.payment.delete');
     });
-   
+    //promotion
+    Route::prefix('khuyen-mai')->group(function(){
+        Route::get('','promotionController@index')->name('get_backend.promotion.index');
+
+        Route::get('them-moi','promotionController@create')->name('get_backend.promotion.create');
+        Route::post('them-moi','promotionController@store')->name('get_backend.promotion.store');
+
+        Route::get('cap-nhat/{id}','promotionController@edit')->name('get_backend.promotion.edit');
+        Route::post('cap-nhat/{id}','promotionController@update')->name('get_backend.promotion.update');
+
+        Route::get('xoa/{id}','promotionController@delete')->name('get_backend.promotion.delete');
+    });
+       //customer
+       Route::prefix('khach-hang')->group(function(){
+        Route::get('','customerController@index')->name('get_backend.customer.index');
+
+        Route::get('xoa/{id}','customerController@delete')->name('get_backend.customer.delete');
+    });
+     //account
+     Route::prefix('thanh-vien')->group(function(){
+        Route::get('','accountController@index')->name('get_backend.account.index');
+
+        Route::get('them-moi','accountController@create')->name('get_backend.account.create');
+        Route::post('them-moi','accountController@store')->name('get_backend.account.store');
+
+        Route::get('cap-nhat/{id}','accountController@edit')->name('get_backend.account.edit');
+        Route::post('cap-nhat/{id}','accountController@update')->name('get_backend.account.update');
+
+        Route::get('xoa/{id}','accountController@delete')->name('get_backend.account.delete');
+    });
+        //don hang
+        Route::prefix('don-hang')->group(function(){
+            Route::get('','orderController@index')->name('get_backend.order.index');
+    
+            Route::get('chi-tiet/{id}','orderController@detail')->name('get_backend.order.detail');
+            Route::post('chi-tiet/{id}','orderController@update')->name('get_backend.order.update');
+    
+            Route::get('xoa/{id}','orderController@delete')->name('get_backend.order.delete');
+            //post comment admin
+            Route::post('postCommnetAdmin','orderController@postCommnetAdmin')->name('get_backend.order.postCommnetAdmin');
+             //put order status
+             Route::post('putOrderStatus','orderController@putOrderStatus')->name('get_backend.order.putOrderStatus');
+        });
 });

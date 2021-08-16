@@ -49,126 +49,36 @@
                         </h2>
                         <div class="latest-deals-product">
                            <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="10" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
-                              <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
+                              @foreach($productsDiscount as $item)
+                           <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
                                  <div class="left-block">
-                                     <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" title="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" src="{{asset('images/product/p35_large.jpg')}}"></a>
+                                     <a href="{{ route('get.productDetail',$item->p_slug) }}"><img class="img-responsive" alt="{{$item->p_name}}" title="{{$item->p_name}}" src="{{asset('images/product\/')}}{{$item->p_avatar}}"></a>
                                      <div class="quick-view">
                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                         <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
+                                         <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="{{route('get.productDetail',$item->p_slug)}}"></a>
                                      </div>
                                      <div class="add-to-cart">
-                                         <a class="add-to-car" href="javascript:void(0);" ng-click="AddToCard(item)">Thêm vào giỏ</a>
+                                         <a class="add-to-car" onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
                                      </div>
                                      <div class="price-percent-reduction2 ng-binding">
                                          Sale
-                                         <br>-35<strong>%</strong>
+                                         <br>-{{ $item->fk_discount->d_number }}<strong>%</strong>
                                      </div>
                                  </div>
                                  <div class="right-block">
-                                     <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html" class="ng-binding">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
+                                     <h5 class="product-name"><a href="{{ route('get.productDetail',$item->p_slug) }}" class="ng-binding">{{ $item->p_name }}</a></h5>
                                     <div class="content_price ng-scope" ng-if="ConfigProduct.ShowPrice==true">
-                                       <span class="price product-price ng-binding ng-scope" >400,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                        <span class="price old-price ng-binding ng-scope" >620,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
+                                       @if($item->p_discount_id != null)
+                                       <span class="price product-price ng-binding ng-scope" >{{number_format(priceNew($item->p_price , $item->fk_discount->d_number )) }}&nbsp;₫</span>
+                                        <span class="price old-price ng-binding ng-scope" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                        @else
+                                        <span class="price product-price ng-binding ng-scope" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                        @endif
                                      </div>
                                  </div>
                              </li>
-                             <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
-                                 <div class="left-block">
-                                     <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" title="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" src="{{asset('images/product/p35_large.jpg')}}"></a>
-                                     <div class="quick-view">
-                                         <a title="Add to my wishlist" class="heart" href="#"></a>
-                                         <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                     </div>
-                                     <div class="add-to-cart">
-                                         <a class="add-to-car" href="javascript:void(0);" ng-click="AddToCard(item)">Thêm vào giỏ</a>
-                                     </div>
-                                     <div class="price-percent-reduction2 ng-binding">
-                                         Sale
-                                         <br>-35<strong>%</strong>
-                                     </div>
-                                 </div>
-                                 <div class="right-block">
-                                     <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html" class="ng-binding">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
-                                    <div class="content_price ng-scope" ng-if="ConfigProduct.ShowPrice==true">
-                                       <span class="price product-price ng-binding ng-scope" >400,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                        <span class="price old-price ng-binding ng-scope" >620,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                     </div>
-                                 </div>
-                             </li>
-                             <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
-                                 <div class="left-block">
-                                     <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" title="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" src="{{asset('images/product/p35_large.jpg')}}"></a>
-                                     <div class="quick-view">
-                                         <a title="Add to my wishlist" class="heart" href="#"></a>
-                                         <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                     </div>
-                                     <div class="add-to-cart">
-                                         <a class="add-to-car" href="javascript:void(0);" ng-click="AddToCard(item)">Thêm vào giỏ</a>
-                                     </div>
-                                     <div class="price-percent-reduction2 ng-binding">
-                                         Sale
-                                         <br>-35<strong>%</strong>
-                                     </div>
-                                 </div>
-                                 <div class="right-block">
-                                     <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html" class="ng-binding">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
-                                    <div class="content_price ng-scope" ng-if="ConfigProduct.ShowPrice==true">
-                                       <span class="price product-price ng-binding ng-scope" >400,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                        <span class="price old-price ng-binding ng-scope" >620,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                     </div>
-                                 </div>
-                             </li>
-                             <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
-                                 <div class="left-block">
-                                     <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" title="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" src="{{asset('images/product/p35_large.jpg')}}"></a>
-                                     <div class="quick-view">
-                                         <a title="Add to my wishlist" class="heart" href="#"></a>
-                                         <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                     </div>
-                                     <div class="add-to-cart">
-                                         <a class="add-to-car" href="javascript:void(0);" ng-click="AddToCard(item)">Thêm vào giỏ</a>
-                                     </div>
-                                     <div class="price-percent-reduction2 ng-binding">
-                                         Sale
-                                         <br>-35<strong>%</strong>
-                                     </div>
-                                 </div>
-                                 <div class="right-block">
-                                     <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html" class="ng-binding">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
-                                    <div class="content_price ng-scope" ng-if="ConfigProduct.ShowPrice==true">
-                                       <span class="price product-price ng-binding ng-scope" >400,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                        <span class="price old-price ng-binding ng-scope" >620,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                     </div>
-                                 </div>
-                             </li>
-                             <li ng-repeat="item in ProductPromotionSlides" class="ng-scope">
-                                 <div class="left-block">
-                                     <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" title="Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung" src="{{asset('images/product/p35_large.jpg')}}"></a>
-                                     <div class="quick-view">
-                                         <a title="Add to my wishlist" class="heart" href="#"></a>
-                                         <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                         <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                     </div>
-                                     <div class="add-to-cart">
-                                         <a class="add-to-car" href="javascript:void(0);" ng-click="AddToCard(item)">Thêm vào giỏ</a>
-                                     </div>
-                                     <div class="price-percent-reduction2 ng-binding">
-                                         Sale
-                                         <br>-35<strong>%</strong>
-                                     </div>
-                                 </div>
-                                 <div class="right-block">
-                                     <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html" class="ng-binding">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
-                                    <div class="content_price ng-scope" ng-if="ConfigProduct.ShowPrice==true">
-                                       <span class="price product-price ng-binding ng-scope" >400,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                        <span class="price old-price ng-binding ng-scope" >620,000&nbsp;₫</span><!-- end ngIf: item.IsPromotion==true&&item.Price>0 -->
-                                     </div>
-                                 </div>
-                             </li>
+                              @endforeach
                            </ul>
                         </div>
                      </div>
@@ -187,24 +97,20 @@
                   <div class="col-md-12">
                      <div class="content-page">
                         <div class="container">
+
                            <div class="category-featured featured1">
                               <nav class="navbar nav-menu show-brand">
                                  <div class="container">
                                     <!-- Brand and toggle get grouped for better mobile display -->
-                                    <div class="navbar-brand"><a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/icon/s5.png')}}" />Thời trang</a></div>
+                                    <div class="navbar-brand"><a href="{{route('get.categoryProduct',$category_thoi_trang->c_slug)}}"><img src="{{asset('images/icon\/')}}{{$category_thoi_trang->c_avatar}}" />{{$category_thoi_trang->c_name}}</a></div>
                                     <span class="toggle-menu"></span>
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse">
                                        <ul class="nav navbar-nav">
-                                          <li class="active"><a data-toggle="tab" href="#tab_1">Tất cả sản phẩm</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_0' data-code="40422">&#193;o sơ mi</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_1' data-code="40423">&#193;o kho&#225;c</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_2' data-code="40424">&#193;o thun</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_3' data-code="40427">Đầm, v&#225;y nữ</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_4' data-code="40428">Ch&#226;n v&#225;y</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_5' data-code="40432">Đồ l&#243;t, đồ ngủ</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_6' data-code="40436">Đồ bơi</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_1_7' data-code="40437">Phụ kiện</a></li>
+                                          <li class="active"><a data-toggle="tab" href="#{{$category_thoi_trang->c_slug}}">Tất cả sản phẩm</a></li>
+                                          @foreach($getlistcategory_thoi_trang as $item)
+                                          <li><a class="sub" data-toggle="tab" href='#{{$item->c_slug}}' >{{$item->c_name}}</a></li>
+                                          @endforeach
                                        </ul>
                                     </div>
                                     <!-- /.navbar-collapse -->
@@ -212,251 +118,106 @@
                                  <!-- /.container-fluid -->
                                  <div id="elevator-1" class="floor-elevator">
                                     <a href="#" class="btn-elevator up disabled fa fa-angle-up"></a>
-                                    <a href="#elevator-2" class="btn-elevator down fa fa-angle-down"></a>
+                                    <a href="#elevator-3" class="btn-elevator down fa fa-angle-down"></a>
                                  </div>
                               </nav>
                               <div class="product-featured clearfix">
                                  <div class="row">
                                     <div class="col-sm-2 sub-category-wapper">
                                        <ul class="sub-category-list">
-                                          <li><a href="/san-pham/ao-so-mi-40422">&#193;o sơ mi</a></li>
-                                          <li><a href="/san-pham/ao-khoac-40423">&#193;o kho&#225;c</a></li>
-                                          <li><a href="/san-pham/ao-thun-40424">&#193;o thun</a></li>
-                                          <li><a href="/san-pham/quan-tay-cong-so-40425">Quần t&#226;y c&#244;ng sở</a></li>
-                                          <li><a href="/san-pham/quan-jean-40426">Quần jean</a></li>
-                                          <li><a href="/san-pham/dam-vay-nu-40427">Đầm, v&#225;y nữ</a></li>
-                                          <li><a href="/san-pham/chan-vay-40428">Ch&#226;n v&#225;y</a></li>
-                                          <li><a href="/san-pham/quan-kaki-nam-40429">Quần kaki nam</a></li>
-                                          <li><a href="/san-pham/ao-vest-blazer-nam-40430">&#193;o vest, blazer nam</a></li>
-                                          <li><a href="/san-pham/quan-shorts-nam-40431">Quần shorts nam</a></li>
-                                          <li><a href="/san-pham/do-lot-do-ngu-40432">Đồ l&#243;t, đồ ngủ</a></li>
-                                          <li><a href="/san-pham/quan-thoi-trang-40433">Quần thời trang</a></li>
-                                          <li><a href="/san-pham/quan-legging-40434">Quần legging</a></li>
-                                          <li><a href="/san-pham/trang-phuc-cuoi-40435">Trang phục cưới</a></li>
-                                          <li><a href="/san-pham/do-boi-40436">Đồ bơi</a></li>
-                                          <li><a href="/san-pham/phu-kien-40437">Phụ kiện</a></li>
+                                          @foreach($getlistcategory_thoi_trang as $item)
+                                          <li><a href="{{route('get.categoryProduct',$item->c_slug)}}">{{$item->c_name}}</a></li>
+                                          @endforeach
                                        </ul>
                                     </div>
                                     <div class="col-sm-10 col-right-tab">
                                        <div class="product-featured-tab-content">
                                           <div class="tab-container">
-                                             <div class="tab-panel active" id="tab_1">
+
+                                             <div class="tab-panel active" id="{{$category_thoi_trang->c_slug}}">
                                                 <div class="box-left">
                                                    <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
+                                                      <a href="{{route('get.categoryProduct',$category_thoi_trang->c_slug)}}">
+                                                         <img src="{{asset('images/banner\/')}}{{$category_thoi_trang->c_banner}}" alt="{{$category_thoi_trang->c_c_banner}}">
+                                                      </a>
                                                    </div>
                                                 </div>
                                                 <div class="box-right">
                                                    <ul class="product-list row">
+                                                      @foreach($productsAll_thoi_trang as $item)
                                                       <li class="col-sm-4">
                                                          <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html">Đầm body c&#225; t&#236;nh với nhiều m&#224;u sắc hiện đại, trẻ trung</a></h5>
+                                                            <h5 class="product-name"><a href="{{route('get.productDetail',$item->p_slug)}}">{{$item->p_name}}</a></h5>
                                                             <div class="content_price">
-                                                               <span class="price product-price">400.000₫</span>
-                                                               <span class="price old-price">620.000₫</span>
+                                                            @if($item->p_discount_id != null)
+                                                               <span class="price product-price" >{{number_format(priceNew($item->p_price , $item->fk_discount->d_number )) }}&nbsp;₫</span>
+                                                               <span class="price old-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                               @else
+                                                               <span class="price product-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                            @endif
                                                             </div>
                                                          </div>
                                                          <div class="left-block">
-                                                            <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p35_large.jpg')}}" /></a>
+                                                            <a href="{{route('get.productDetail',$item->p_slug)}}"><img class="img-responsive" alt="product" src="{{asset('images/product\/')}}{{$item->p_avatar}}" /></a>
                                                             <div class="quick-view">
                                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
+                                                               <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle=""></a>
                                                             </div>
                                                             <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51001,1)">Thêm vào giỏ</a>
+                                                               <a class="add-to-car"  onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
                                                             </div>
                                                          </div>
                                                       </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html">Đầm maxi dự tiệc hoa hồng - NH028</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">190.000₫</span>
-                                                               <span class="price old-price">240.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p49_large.jpg')}}" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51002,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-body-lap-the-tay-dai.html">Đầm body lập thể tay d&#224;i</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">310.000₫</span>
-                                                               <span class="price old-price">560.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/dam-body-lap-the-tay-dai.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p50_large.jpg')}}" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-lap-the-tay-dai.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-lap-the-tay-dai.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51003,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html">Đầm mặc nh&#224; tay lỡ NITIMO 2001</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">190.000₫</span>
-                                                               <span class="price old-price">280.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p51_large.jpg')}}" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51004,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html">Đầm mặc nh&#224; phối nơ xinh xắn Twins</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">2.400.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p52_large.jpg')}}" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51005,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html">Đầm dạo phố họa tiết style - A1</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">220.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p53_large.jpg')}}" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51006,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
+                                                       @endforeach
                                                    </ul>
                                                 </div>
                                              </div>
-                                             <div class="tab-panel" id="tab_1_0">
+                                             @foreach($getlistcategory_thoi_trang as $item)
+                                             <div class="tab-panel" id="{{$item->c_slug}}">
                                                 <div class="box-left">
                                                    <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
+                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner\/')}}{{$category_thoi_trang->c_banner}}" alt="Thời trang"></a>
                                                    </div>
                                                 </div>
                                                 <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
+                                                   <!-- <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div> -->
+                                                   <ul class="product-list row">
+                                                         @php
+                                                           $product_thoi_trang_category = App\Models\product::with('fk_discount:id,d_number,d_active','fk_category:id,c_name,c_slug')
+                                                            ->where('p_category_id',$item->id)->limit(6)->get();
+                                                           // dd($product_thoi_trang_category);
+                                                         @endphp
+                                                         @foreach($product_thoi_trang_category as $item)
+                                                      <li class="col-sm-4">
+                                                         <div class="right-block">
+                                                            <h5 class="product-name"><a href="{{route('get.productDetail',$item->p_slug)}}">{{$item->p_name}}</a></h5>
+                                                            <div class="content_price">
+                                                            @if($item->p_discount_id != null)
+                                                               <span class="price product-price" >{{number_format(priceNew($item->p_price , $item->fk_discount->d_number )) }}&nbsp;₫</span>
+                                                               <span class="price old-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                               @else
+                                                               <span class="price product-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                            @endif
+                                                            </div>
+                                                         </div>
+                                                         <div class="left-block">
+                                                            <a href="{{route('get.productDetail',$item->p_slug)}}"><img class="img-responsive" alt="product" src="{{asset('images/product\/')}}{{$item->p_avatar}}" /></a>
+                                                            <div class="quick-view">
+                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                               <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                            </div>
+                                                            <div class="add-to-cart">
+                                                               <a class="add-to-car"  onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
+                                                            </div>
+                                                         </div>
+                                                      </li>
+                                                       @endforeach
+                                                   </ul>
                                                 </div>
                                              </div>
-                                             <div class="tab-panel" id="tab_1_1">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_2">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_3">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_4">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_5">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_6">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_1_7">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner/banner-product1.jpg')}}" alt="Thời trang"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
+                                             @endforeach
                                           </div>
                                        </div>
                                     </div>
@@ -468,26 +229,22 @@
                               <nav class="navbar nav-menu show-brand">
                                  <div class="container">
                                     <!-- Brand and toggle get grouped for better mobile display -->
-                                    <div class="navbar-brand"><a href="/san-pham/trang-suc-40416"><img src="public/images/icon/s9.png" />Trang sức</a></div>
+                                    <div class="navbar-brand"><a href="{{route('get.categoryProduct',$category_trang_suc->c_slug)}}"><img src="{{asset('images/icon\/')}}{{$category_trang_suc->c_avatar}}" />{{$category_trang_suc->c_name}}</a></div>
                                     <span class="toggle-menu"></span>
                                     <!-- Collect the nav links, forms, and other content for toggling -->
                                     <div class="collapse navbar-collapse">
                                        <ul class="nav navbar-nav">
-                                          <li class="active"><a data-toggle="tab" href="#tab_3">Tất cả sản phẩm</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_0' data-code="40485">Trang sức cưới</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_1' data-code="40486">Trang sức v&#224;ng</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_2' data-code="40488">Nhẫn đ&#237;nh h&#244;n</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_3' data-code="40489">Mặt đ&#225; qu&#253;</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_4' data-code="40490">Ngọc trai</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_5' data-code="40495">V&#242;ng cổ</a></li>
-                                          <li><a class="sub" data-toggle="tab" href='#tab_3_6' data-code="40496">B&#244;ng tai</a></li>
+                                          <li class="active"><a data-toggle="tab" href="#{{$category_trang_suc->c_slug}}">Tất cả sản phẩm</a></li>
+                                          @foreach($getlistcategory_trang_suc as $item)
+                                          <li><a class="sub" data-toggle="tab" href='#{{$item->c_slug}}' >{{$item->c_name}}</a></li>
+                                          @endforeach
                                        </ul>
                                     </div>
                                     <!-- /.navbar-collapse -->
                                  </div>
                                  <!-- /.container-fluid -->
                                  <div id="elevator-3" class="floor-elevator">
-                                    <a href="#elevator-2" class="btn-elevator up fa fa-angle-up"></a>
+                                    <a href="#elevator-1" class="btn-elevator up fa fa-angle-up"></a>
                                     <a href="#elevator-4" class="btn-elevator down fa fa-angle-down"></a>
                                  </div>
                               </nav>
@@ -495,228 +252,99 @@
                                  <div class="row">
                                     <div class="col-sm-2 sub-category-wapper">
                                        <ul class="sub-category-list">
-                                          <li><a href="/san-pham/trang-suc-cuoi-40485">Trang sức cưới</a></li>
-                                          <li><a href="/san-pham/trang-suc-vang-40486">Trang sức v&#224;ng</a></li>
-                                          <li><a href="/san-pham/trang-suc-kim-cuong-40487">Trang sức kim cương</a></li>
-                                          <li><a href="/san-pham/nhan-dinh-hon-40488">Nhẫn đ&#237;nh h&#244;n</a></li>
-                                          <li><a href="/san-pham/mat-da-quy-40489">Mặt đ&#225; qu&#253;</a></li>
-                                          <li><a href="/san-pham/ngoc-trai-40490">Ngọc trai</a></li>
-                                          <li><a href="/san-pham/trang-suc-cz-40491">Trang sức CZ</a></li>
-                                          <li><a href="/san-pham/trang-suc-italy-40492">Trang sức Italy</a></li>
-                                          <li><a href="/san-pham/trang-suc-jemma-40493">Trang sức Jemma</a></li>
-                                          <li><a href="/san-pham/vong-tay-40494">V&#242;ng tay</a></li>
-                                          <li><a href="/san-pham/vong-co-40495">V&#242;ng cổ</a></li>
-                                          <li><a href="/san-pham/bong-tai-40496">B&#244;ng tai</a></li>
-                                          <li><a href="/san-pham/lac-tay-chan-40497">Lắc tay, ch&#226;n</a></li>
+                                          @foreach($getlistcategory_trang_suc as $item)
+                                          <li><a href="{{route('get.categoryProduct',$item->c_slug)}}">{{$item->c_name}}</a></li>
+                                          @endforeach
                                        </ul>
                                     </div>
                                     <div class="col-sm-10 col-right-tab">
                                        <div class="product-featured-tab-content">
                                           <div class="tab-container">
-                                             <div class="tab-panel active" id="tab_3">
+
+                                             <div class="tab-panel active" id="{{$category_trang_suc->c_slug}}">
                                                 <div class="box-left">
                                                    <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
+                                                      <a href="{{route('get.categoryProduct',$category_trang_suc->c_slug)}}">
+                                                         <img src="{{asset('images/banner\/')}}{{$category_trang_suc->c_banner}}" alt="{{$category_trang_suc->c_c_banner}}">
+                                                      </a>
                                                    </div>
                                                 </div>
                                                 <div class="box-right">
                                                    <ul class="product-list row">
+                                                      @foreach($productsAll_trang_suc as $item)
                                                       <li class="col-sm-4">
                                                          <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/mat-day-hien-dai-sang-trong-20-0216p3001na611.html">Mặt d&#226;y hiện đại, sang trọng 20-0216P3001NA611</a></h5>
+                                                            <h5 class="product-name"><a href="{{route('get.productDetail',$item->p_slug)}}">{{$item->p_name}}</a></h5>
                                                             <div class="content_price">
-                                                               <span class="price product-price">11.200.000₫</span>
-                                                               <span class="price old-price">14.000.000₫</span>
+                                                            @if($item->p_discount_id != null)
+                                                               <span class="price product-price" >{{number_format(priceNew($item->p_price , $item->fk_discount->d_number )) }}&nbsp;₫</span>
+                                                               <span class="price old-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                               @else
+                                                               <span class="price product-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                            @endif
                                                             </div>
                                                          </div>
                                                          <div class="left-block">
-                                                            <a href="/san-pham/mat-day-hien-dai-sang-trong-20-0216p3001na611.html"><img class="img-responsive" alt="product" src="public/images/product/p44_large.jpg" /></a>
+                                                            <a href="{{route('get.productDetail',$item->p_slug)}}"><img class="img-responsive" alt="product" src="{{asset('images/product\/')}}{{$item->p_avatar}}" /></a>
                                                             <div class="quick-view">
                                                                <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/mat-day-hien-dai-sang-trong-20-0216p3001na611.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/mat-day-hien-dai-sang-trong-20-0216p3001na611.html"></a>
+                                                               <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="{{route('get.productDetail',$item->p_slug)}}"></a>
                                                             </div>
                                                             <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51025,1)">Thêm vào giỏ</a>
+                                                               <a class="add-to-car"  onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
                                                             </div>
                                                          </div>
                                                       </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/nhan-nu-085-1014r7054vc1.html">Nhẫn nữ 085-1014R7054VC1</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">55.000.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/nhan-nu-085-1014r7054vc1.html"><img class="img-responsive" alt="product" src="public/images/product/p82_large.jpg" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/nhan-nu-085-1014r7054vc1.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/nhan-nu-085-1014r7054vc1.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51026,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/nhan-nu-1210r4455a2.html">Nhẫn nữ 1210R4455A2</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">33.000.000₫</span>
-                                                               <span class="price old-price">37.000.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/nhan-nu-1210r4455a2.html"><img class="img-responsive" alt="product" src="public/images/product/p83_large.jpg" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/nhan-nu-1210r4455a2.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/nhan-nu-1210r4455a2.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51027,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/nhan-nu-1211r0018bm.html">Nhẫn nữ 1211R0018BM</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">75.000.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/nhan-nu-1211r0018bm.html"><img class="img-responsive" alt="product" src="public/images/product/p84_large.jpg" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/nhan-nu-1211r0018bm.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/nhan-nu-1211r0018bm.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51028,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/kieng-co-0109n7009pun1.html">Kiềng cổ 0109N7009PUN1</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">1.300.000.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/kieng-co-0109n7009pun1.html"><img class="img-responsive" alt="product" src="public/images/product/p85_large.jpg" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/kieng-co-0109n7009pun1.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/kieng-co-0109n7009pun1.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51029,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
-                                                      <li class="col-sm-4">
-                                                         <div class="right-block">
-                                                            <h5 class="product-name"><a href="/san-pham/nhan-nu-107r8044bm.html">Nhẫn nữ 107R8044BM</a></h5>
-                                                            <div class="content_price">
-                                                               <span class="price product-price">33.000.000₫</span>
-                                                            </div>
-                                                         </div>
-                                                         <div class="left-block">
-                                                            <a href="/san-pham/nhan-nu-107r8044bm.html"><img class="img-responsive" alt="product" src="public/images/product/p86_large.jpg" /></a>
-                                                            <div class="quick-view">
-                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
-                                                               <a title="Xem chi tiết" class="compare" href="/san-pham/nhan-nu-107r8044bm.html"></a>
-                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/nhan-nu-107r8044bm.html"></a>
-                                                            </div>
-                                                            <div class="add-to-cart">
-                                                               <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51030,1)">Thêm vào giỏ</a>
-                                                            </div>
-                                                         </div>
-                                                      </li>
+                                                       @endforeach
                                                    </ul>
                                                 </div>
                                              </div>
-                                             <div class="tab-panel" id="tab_3_0">
+                                             @foreach($getlistcategory_trang_suc as $item)
+                                             <div class="tab-panel" id="{{$item->c_slug}}">
                                                 <div class="box-left">
                                                    <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
+                                                      <a href="/san-pham/thoi-trang-40412"><img src="{{asset('images/banner\/')}}{{$category_trang_suc->c_banner}}" alt="Thời trang"></a>
                                                    </div>
                                                 </div>
                                                 <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
+                                                   <!-- <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="{{asset('images/ajax-loader.gif')}}" /></div> -->
+                                                   <ul class="product-list row">
+                                                         @php
+                                                           $product_trang_suc_category = App\Models\product::with('fk_discount:id,d_number,d_active','fk_category:id,c_name,c_slug')
+                                                            ->where('p_category_id',$item->id)->limit(6)->get();
+                                                           // dd($product_trang_suc_category);
+                                                         @endphp
+                                                         @foreach($product_trang_suc_category as $item)
+                                                      <li class="col-sm-4">
+                                                         <div class="right-block">
+                                                            <h5 class="product-name"><a href="{{route('get.productDetail',$item->p_slug)}}">{{$item->p_name}}</a></h5>
+                                                            <div class="content_price">
+                                                            @if($item->p_discount_id != null)
+                                                               <span class="price product-price" >{{number_format(priceNew($item->p_price , $item->fk_discount->d_number )) }}&nbsp;₫</span>
+                                                               <span class="price old-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                               @else
+                                                               <span class="price product-price" >{{ number_format($item->p_price) }}&nbsp;₫</span>
+                                                            @endif
+                                                            </div>
+                                                         </div>
+                                                         <div class="left-block">
+                                                            <a href="{{route('get.productDetail',$item->p_slug)}}"><img class="img-responsive" alt="product" src="{{asset('images/product\/')}}{{$item->p_avatar}}" /></a>
+                                                            <div class="quick-view">
+                                                               <a title="Add to my wishlist" class="heart" href="#"></a>
+                                                               <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                               <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="{{route('get.productDetail',$item->p_slug)}}"></a>
+                                                            </div>
+                                                            <div class="add-to-cart">
+                                                               <a class="add-to-car"  onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
+                                                            </div>
+                                                         </div>
+                                                      </li>
+                                                       @endforeach
+                                                   </ul>
                                                 </div>
                                              </div>
-                                             <div class="tab-panel" id="tab_3_1">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_3_2">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_3_3">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_3_4">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_3_5">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
-                                             <div class="tab-panel" id="tab_3_6">
-                                                <div class="box-left">
-                                                   <div class="banner-img">
-                                                      <a href="/san-pham/trang-suc-40416"><img src="public/images/banner/jewelry-slide.jpg" alt="Trang sức"></a>
-                                                   </div>
-                                                </div>
-                                                <div class="box-right">
-                                                   <div class="loading" style="display:none;text-align:center;padding:20px;"><img src="public/images/ajax-loader.gif" /></div>
-                                                   <ul class="product-list row"></ul>
-                                                </div>
-                                             </div>
+                                             @endforeach
                                           </div>
                                        </div>
                                     </div>
@@ -757,82 +385,28 @@
                         </h2>
                         <div class="blog-list-wapper">
                            <ul class="owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                              @foreach($blogHotGlobal as $item)
                               <li>
                                  <div class="post-thumb image-hover2">
-                                    <a href="/tin-tuc/dien-vay-xe-cao-quyen-ru-nhu-miranda-kerr-10103.html"><img src="{{asset('images/news/blog4.jpg')}}" alt="Diện v&#225;y xẻ cao quyến rũ như Miranda Kerr"></a>
+                                    <a href="{{route('get.blogDetail',$item->bl_slug)}}">
+                                       <img src="{{asset('images/news\/')}}{{$item->bl_avatar}}" alt="{{$item->bl_name}}">
+                                    </a>
                                  </div>
                                  <div class="post-desc">
                                     <h5 class="post-title">
-                                       <a href="/tin-tuc/dien-vay-xe-cao-quyen-ru-nhu-miranda-kerr-10103.html">Diện v&#225;y xẻ cao quyến rũ như Miranda Kerr</a>
+                                       <a href="{{route('get.blogDetail',$item->bl_slug)}}">{{$item->bl_name}}</a>
                                     </h5>
                                     <div class="post-meta">
                                        <span class="date">
-                                       12/08/2017
+                                       {{date('d/n/Y', strtotime($item->created_at))}}
                                        </span>
-                                       <span class="comment">0<span> Bình luận</span></span>
                                     </div>
                                     <div class="readmore">
-                                       <a href="/tin-tuc/dien-vay-xe-cao-quyen-ru-nhu-miranda-kerr-10103.html">Xem thêm</a>
+                                       <a href="{{route('get.blogDetail',$item->bl_slug)}}">Xem thêm</a>
                                     </div>
                                  </div>
                               </li>
-                              <li>
-                                 <div class="post-thumb image-hover2">
-                                    <a href="/tin-tuc/nhung-chiec-vong-co-tao-dang-cap-cho-sao-ngoai-tren-tham-do-10102.html"><img src="{{asset('images/news/blog2.jpg')}}" alt="Những chiếc v&#242;ng cổ tạo đẳng cấp cho sao ngoại tr&#234;n thảm đỏ"></a>
-                                 </div>
-                                 <div class="post-desc">
-                                    <h5 class="post-title">
-                                       <a href="/tin-tuc/nhung-chiec-vong-co-tao-dang-cap-cho-sao-ngoai-tren-tham-do-10102.html">Những chiếc v&#242;ng cổ tạo đẳng cấp cho sao ngoại tr&#234;n thảm đỏ</a>
-                                    </h5>
-                                    <div class="post-meta">
-                                       <span class="date">
-                                       12/08/2017
-                                       </span>
-                                       <span class="comment">0<span> Bình luận</span></span>
-                                    </div>
-                                    <div class="readmore">
-                                       <a href="/tin-tuc/nhung-chiec-vong-co-tao-dang-cap-cho-sao-ngoai-tren-tham-do-10102.html">Xem thêm</a>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="post-thumb image-hover2">
-                                    <a href="/tin-tuc/20-bo-vay-dep-cua-cac-dien-vien-tung-doat-giai-oscar-10101.html"><img src="{{asset('images/news/blog1.jpg')}}" alt="20 bộ v&#225;y đẹp của c&#225;c diễn vi&#234;n từng đoạt giải Oscar"></a>
-                                 </div>
-                                 <div class="post-desc">
-                                    <h5 class="post-title">
-                                       <a href="/tin-tuc/20-bo-vay-dep-cua-cac-dien-vien-tung-doat-giai-oscar-10101.html">20 bộ v&#225;y đẹp của c&#225;c diễn vi&#234;n từng đoạt giải Oscar</a>
-                                    </h5>
-                                    <div class="post-meta">
-                                       <span class="date">
-                                       12/08/2017
-                                       </span>
-                                       <span class="comment">0<span> Bình luận</span></span>
-                                    </div>
-                                    <div class="readmore">
-                                       <a href="/tin-tuc/20-bo-vay-dep-cua-cac-dien-vien-tung-doat-giai-oscar-10101.html">Xem thêm</a>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li>
-                                 <div class="post-thumb image-hover2">
-                                    <a href="/tin-tuc/phoi-quan-jeans-cap-cao-theo-phong-cach-thap-nien-1970-10100.html"><img src="{{asset('images/news/blog3.jpg')}}" alt="Phối quần jeans cạp cao theo phong c&#225;ch thập ni&#234;n 1970"></a>
-                                 </div>
-                                 <div class="post-desc">
-                                    <h5 class="post-title">
-                                       <a href="/tin-tuc/phoi-quan-jeans-cap-cao-theo-phong-cach-thap-nien-1970-10100.html">Phối quần jeans cạp cao theo phong c&#225;ch thập ni&#234;n 1970</a>
-                                    </h5>
-                                    <div class="post-meta">
-                                       <span class="date">
-                                       12/08/2017
-                                       </span>
-                                       <span class="comment">0<span> Bình luận</span></span>
-                                    </div>
-                                    <div class="readmore">
-                                       <a href="/tin-tuc/phoi-quan-jeans-cap-cao-theo-phong-cach-thap-nien-1970-10100.html">Xem thêm</a>
-                                    </div>
-                                 </div>
-                              </li>
+                              @endforeach
                            </ul>
                         </div>
                      </div>
@@ -951,4 +525,9 @@
                </div>
             </div>
          </div>
+
+         <script>
+
+Sản phẩm khuyến mãi
+         </script>
 @stop

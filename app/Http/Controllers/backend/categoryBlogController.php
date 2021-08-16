@@ -62,7 +62,7 @@ class categoryBlogController extends Controller
     function update(categoryBlogRequest $request , $id){
         $data = $request->except(['_tokent']);
         $data['cbl_slug'] = Str::slug($request->c_name);
-        $data['created_at']  = Carbon::now();
+        $data['updated_at']  = Carbon::now();
  
         if ($request->has('cbl_active')) {
          $data['cbl_active'] = 1;

@@ -1,3 +1,5 @@
+
+
 @extends('layout.frontend2')
 @section('content')
 <div class="main">
@@ -11,9 +13,15 @@
                            </span>
                         </h3>
                         <ul>
-                           <li><a href="/dang-nhap.html"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
-                           <li><a href="/dang-ky.html"><i class="fa fa-key"></i> Đăng ký</a></li>
-                           <li><a href="/thay-doi-mat-khau.html"><i class="fa fa-key"></i> Quên mật khẩu</a></li>
+                        <li>
+                            <a href="{{ route('get.login') }}"><i class="fa fa-sign-in"></i> Đăng nhập</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('get.register') }}"><i class="fa fa-key"></i> Đăng ký</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('get.register') }}"><i class="fa fa-key"></i> Quên mật khẩu</a>
+                        </li>
                         </ul>
                      </div>
                   </div>
@@ -33,76 +41,70 @@
                      <script src="/app/controllers/accountController.js"></script>
                      <div class="register-content clearfix" ng-controller="accountController" ng-init="initRegisterController()">
                         <h1 class="page-heading"><span>Đăng ký tài khoản</span></h1>
-                        <div ng-if="IsError" class="alert alert-danger fade in">
-                           <button data-dismiss="alert" class="close"></button>
-                           <i class="fa-fw fa fa-times"></i>
-                           <strong>Error!</strong>
-                           <span ng-bind-html="Message"></span>
-                        </div>
-                        <div ng-if="IsSuccess" class="alert alert-success fade in">
-                           <button data-dismiss="alert" class="close"></button>
-                           <i class="fa-fw fa fa-check"></i>
-                           <strong>Success!</strong> Đăng ký thành công.
-                        </div>
-                        <div ng-if="InValid" class="alert alert-danger fade in">
-                           <button data-dismiss="alert" class="close"></button>
-                           <i class="fa-fw fa fa-times"></i>
-                           <strong>Error!</strong>
-                           <span ng-bind-html="Message"></span>
-                        </div>
+
+                        
+
+                        @if ($message = Session::get('error'))
+                    <div ng-if="InValid" class="alert alert-danger fade in">
+                        <button data-dismiss="alert" class="close"></button>
+                        <i class="fa-fw fa fa-times"></i>
+                        <strong>{{$message}}</strong>
+                        <span ng-bind-html="Message"></span>
+                    </div>
+                    @endif
+
                         <div class="col-md-8 col-md-offset-2 col-xs-12 col-sm-12 col-xs-offset-0 col-sm-offset-0">
-                           <form class="form-horizontal" ng-submit="register()">
+                           <form class="form-horizontal" method="POST" action="{{ route('password.update') }}">
+                           @csrf
+                           <input type="hidden" name="token" value="{{ $token }}">
                               <h2><span>Thông tin tài khoản</span></h2>
-                              <div class="form-group">
-                                 <label for="Code" class="col-sm-3 control-label">Tài khoản<span class="warning">(*)</span></label>
-                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" ng-model="Code" required="true" />
-                                 </div>
-                              </div>
+    
                               <div class="form-group">
                                  <label for="Email" class="col-sm-3 control-label">Email<span class="warning">(*)</span></label>
                                  <div class="col-sm-9">
-                                    <input type="email" class="form-control" ng-model="Email" required="true" />
+                                    <input type="email" class="form-control" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus />
+                                 @error('email')
+                                 <div class="invalid-feedback" role="alert" style="margin-top: 10px;color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
                                  </div>
                               </div>
                               <div class="form-group">
                                  <label for="Password" class="col-sm-3 control-label">Mật khẩu<span class="warning">(*)</span></label>
                                  <div class="col-sm-9">
-                                    <input type="password" class="form-control" ng-model="Password" required="true" />
+                                    <input type="password" class="form-control" name="password" required autocomplete="new-password" />
+                                 @error('password')
+                                    <div class="invalid-feedback" role="alert" style="margin-top: 10px;color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
                                  </div>
                               </div>
                               <div class="form-group">
                                  <label for="RePassword" class="col-sm-3 control-label">Nhập lại mật khẩu<span class="warning">(*)</span></label>
                                  <div class="col-sm-9">
-                                    <input type="password" class="form-control" ng-model="RePassword" />
+                                    <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" />
+                                 @error('password_confirmation')
+                                    <div class="invalid-feedback" role="alert" style="margin-top: 10px;color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @enderror
                                  </div>
                               </div>
-                              <h2>Thông tin cá nhân</h2>
-                              <div class="form-group">
-                                 <label for="Name" class="col-sm-3 control-label">Họ tên<span class="warning">(*)</span></label>
+                              <!-- <div class="form-group">
+                                 <label for="" class="col-sm-3 control-label">Điện thoại</label>
                                  <div class="col-sm-9">
-                                    <input type="text" class="form-control" ng-model="Name" required="true" />
+                                    <input type="text" class="form-control" ng-model="Phone" />
                                  </div>
-                              </div>
-                              <div class="form-group">
-                                 <label class="col-sm-3 control-label">Giới tính</label>
-                                 <div class="col-sm-9">
-                                    <select class="form-control" ng-model="GenderId"
-                                       ng-options="item.Id as item.Name for item in Genders"></select>
-                                 </div>
-                              </div>
-                              <div class="form-group form-inline">
+                              </div> -->
+                             
+                              <!-- <div class="form-group form-inline">
                                  <label class="col-sm-3 control-label">Ngày sinh</label>
                                  <div class="col-sm-9">
                                     <select class="col-md-4 form-control" ng-model="SelectedDay" ng-options="label for label in Days | limitTo:NumberOfDays" placeholder="Ngày"></select>
                                     <select class="col-md-4 form-control" ng-model="SelectedMonth" ng-options="label for label in Months" ng-change="UpdateNumberOfDays()" placeholder="Tháng"></select>
                                     <select class="col-md-4 form-control" ng-model="SelectedYear" ng-options="label for label in Years" ng-change="UpdateNumberOfDays()" placeholder="Năm"></select>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="" class="col-sm-3 control-label">Điện thoại</label>
-                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" ng-model="Phone" />
                                  </div>
                               </div>
                               <div class="form-group">
@@ -124,7 +126,7 @@
                                     <select class="form-control" ng-model="DistrictId"
                                        ng-options="item.Id as item.Name for item in Districts"></select>
                                  </div>
-                              </div>
+                              </div> -->
                               <div class="form-group">
                                  <div class="col-sm-offset-4 col-sm-8">
                                     <button type="submit" class="btn btn-primary">Đăng ký</button>

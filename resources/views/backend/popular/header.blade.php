@@ -102,7 +102,7 @@
                       </li>
 
                       <li class="dropdown-footer">
-                        <a href="signin.html"> <i class="mdi mdi-logout"></i> Log Out </a>
+                        <a href="{{ route('get.backend.logout') }}"> <i class="mdi mdi-logout"></i> Thoát </a>
                       </li>
                     </ul>
                   </li>

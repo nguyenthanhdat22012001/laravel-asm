@@ -3,21 +3,21 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Tag</th>
+      <th scope="col">Phương Thức</th>
+      <th scope="col">Phí Giao Hàng</th>
       <th scope="col">Ẩn Hiện</th>
-      <th scope="col">Hot</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-  @foreach($tags as $item)
+  @foreach($payments as $item)
     <tr>
-      <td>{{$item->t_name}}</td>
-      <td>{{$item->t_active == 1 ? 'Hiện' : 'Ẩn' }}</td>
-      <td>{{$item->t_hot == 1 ? 'Hot' : '' }}</td>
+      <td>{{$item->pay_name}}</td>
+      <td>{{number_format($item->pay_fee_shipping)}} đ</td>
+      <td>{{$item->pay_active == 1 ? 'Hiện' : 'Ẩn' }}</td>
       <td>
-      <a type="button" href="{{route('get_backend.tag.edit',$item->id)}}" class="mb-1 btn btn-pill btn-outline-warning"><i class="mdi mdi-grease-pencil"></i></a>
-      <a type="button" href="{{route('get_backend.tag.delete',$item->id)}}" class="mb-1 btn btn-pill btn-outline-danger"><i class="mdi mdi-delete"></i></a>
+      <a type="button" href="{{route('get_backend.payment.edit',$item->id)}}" class="mb-1 btn btn-pill btn-outline-warning"><i class="mdi mdi-grease-pencil"></i></a>
+      <a type="button" href="{{route('get_backend.payment.delete',$item->id)}}" class="mb-1 btn btn-pill btn-outline-danger"><i class="mdi mdi-delete"></i></a>
       </td>
     </tr>
     @endforeach

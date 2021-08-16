@@ -1,23 +1,23 @@
 @extends('layout.backend')
-@section('title','Danh Sách Tag')
-@section('title_form','Thêm Mới Tag')
+@section('title','Phương Thức Thanh Toán')
+@section('title_form','Thêm Mới Phương Thức Thanh Toán')
 @section('content')
 
 <div class="col-lg-12">
 
-  @include('backend.tag.report')
+  @include('backend.payment.report')
 
 </div>
 
 <div class="col-lg-6">
 
-  @include('backend.tag.list')
+  @include('backend.payment.list')
 
 </div>
 
 <div class="col-lg-6">
 
-  @include('backend.tag.form',["route" => route('get_backend.tag.store')])
+  @include('backend.payment.form',["route" => route('get_backend.payment.store')])
 
 </div>
 

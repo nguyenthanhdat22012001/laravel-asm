@@ -18,141 +18,47 @@
                         </script>
                         <div class="view-product-list">
                            <h2 class="page-heading">
-                              <span class="page-heading-title">Kết quả tìm kiếm với 'đầm'</span>
+                              <span class="page-heading-title">Kết quả tìm kiếm với '{{$search}}'</span>
                            </h2>
                            <!-- PRODUCT LIST -->
                            <ul class="row product-list grid filter">
+                              @foreach($products as $item)
                               <li class="col-md-3 col-sm-6 col-xs-12">
                                  <div class="product-container product-resize fixheight" style="height: 298px;">
                                     <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-body-lap-the-tay-dai.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p50_large.jpg')}}"></a>
+                                       <a href="{{route('get.productDetail',$item->p_slug)}}"><img class="img-responsive" alt="product" src="{{asset('images/product\/')}}{{$item->p_avatar}}"></a>
                                        <div class="quick-view">
                                           <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-lap-the-tay-dai.html"></a>
-                                          <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-lap-the-tay-dai.html"></a>
-                                       </div>
-                                       <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51003,1)">Thêm vào giỏ</a>
-                                       </div>
-                                    </div>
-                                    <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-body-lap-the-tay-dai.html">Đầm body lập thể tay dài</a></h5>
-                                       <div class="content_price">
-                                          <span class="price product-price">310.000₫</span>
-                                          <span class="price old-price">560.000₫</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="col-md-3 col-sm-6 col-xs-12">
-                                 <div class="product-container product-resize fixheight" style="height: 298px;">
-                                    <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p35_large.jpg')}}"></a>
-                                       <div class="quick-view">
-                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
+                                          <a title="Xem chi tiết" class="compare" href="{{route('get.productDetail',$item->p_slug)}}"></a>
                                           <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html"></a>
                                        </div>
                                        <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51001,1)">Thêm vào giỏ</a>
+                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddCart({{ $item->id }})">Thêm vào giỏ</a>
                                        </div>
                                     </div>
                                     <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-body-ca-tinh-voi-nhieu-mau-sac-hien-dai-tre-trung.html">Đầm body cá tình với nhiều màu sắc hiện đại, trẻ trung</a></h5>
+                                       <h5 class="product-name"><a href="{{route('get.productDetail',$item->p_slug)}}">{{$item->p_name}}</a></h5>
                                        <div class="content_price">
-                                          <span class="price product-price">400.000₫</span>
-                                          <span class="price old-price">620.000₫</span>
+                                       @if($item->fk_discount->d_number > 0 && $item->fk_discount->d_active == 1)
+                                          <span class="price product-price">{{number_format(priceNew($item->p_price,$item->fk_discount->d_number))}}₫</span>
+                                          <span class="price old-price">{{number_format($item->p_price)}}₫</span>
+                                          @else
+                                          <span class="price product-price">{{number_format($item->p_price)}}₫</span>
+                                          @endif
                                        </div>
                                     </div>
                                  </div>
                               </li>
-                              <li class="col-md-3 col-sm-6 col-xs-12">
-                                 <div class="product-container product-resize fixheight" style="height: 298px;">
-                                    <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p49_large.jpg')}}"></a>
-                                       <div class="quick-view">
-                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"></a>
-                                          <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html"></a>
-                                       </div>
-                                       <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51002,1)">Thêm vào giỏ</a>
-                                       </div>
-                                    </div>
-                                    <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-maxi-du-tiec-hoa-hong-nh028.html">Đầm maxi dự tiệc hoa hồng - NH028</a></h5>
-                                       <div class="content_price">
-                                          <span class="price product-price">190.000₫</span>
-                                          <span class="price old-price">240.000₫</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="col-md-3 col-sm-6 col-xs-12">
-                                 <div class="product-container product-resize fixheight" style="height: 298px;">
-                                    <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p52_large.jpg')}}"></a>
-                                       <div class="quick-view">
-                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"></a>
-                                          <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html"></a>
-                                       </div>
-                                       <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51005,1)">Thêm vào giỏ</a>
-                                       </div>
-                                    </div>
-                                    <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-mac-nha-phoi-no-xinh-xan-twins.html">Đầm mặc nhà phối nơ xinh xắn Twins</a></h5>
-                                       <div class="content_price">
-                                          <span class="price product-price">2.400.000₫</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="col-md-3 col-sm-6 col-xs-12">
-                                 <div class="product-container product-resize fixheight" style="height: 298px;">
-                                    <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p53_large.jpg')}}"></a>
-                                       <div class="quick-view">
-                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"></a>
-                                          <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html"></a>
-                                       </div>
-                                       <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51006,1)">Thêm vào giỏ</a>
-                                       </div>
-                                    </div>
-                                    <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-dao-pho-hoa-tiet-style-a1.html">Đầm dạo phố họa tiết style - A1</a></h5>
-                                       <div class="content_price">
-                                          <span class="price product-price">220.000₫</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
-                              <li class="col-md-3 col-sm-6 col-xs-12">
-                                 <div class="product-container product-resize fixheight" style="height: 298px;">
-                                    <div class="left-block image-resize" style="height: 221px;">
-                                       <a href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"><img class="img-responsive" alt="product" src="{{asset('images/product/p51_large.jpg')}}"></a>
-                                       <div class="quick-view">
-                                          <a title="Add to my wishlist" class="heart" href="#"></a>
-                                          <a title="Xem chi tiết" class="compare" href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"></a>
-                                          <a href="javascript:void(0);" class="qv-e-button btn-quickview-1 search" title="Xem nhanh" data-handle="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html"></a>
-                                       </div>
-                                       <div class="add-to-cart">
-                                          <a class="add-to-car" href="javascript:void(0);" onclick="AddToCard(51004,1)">Thêm vào giỏ</a>
-                                       </div>
-                                    </div>
-                                    <div class="right-block">
-                                       <h5 class="product-name"><a href="/san-pham/dam-mac-nha-tay-lo-nitimo-2001.html">Đầm mặc nhà tay lỡ NITIMO 2001</a></h5>
-                                       <div class="content_price">
-                                          <span class="price product-price">190.000₫</span>
-                                          <span class="price old-price">280.000₫</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </li>
+                              @endforeach
+                            
                            </ul>
+                           <div class="col-md-12 content_sortPagiBar pagi">
+                              <div id="pagination" class="clearfix">
+                                 <!-- pagination -->
+                                 {{ $products->links('vendor.pagination.custom') }}
+                                
+                              </div>
+                           </div>
                            <!-- ./PRODUCT LIST -->
                         </div>
                      </div>

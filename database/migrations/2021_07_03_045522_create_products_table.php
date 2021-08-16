@@ -23,10 +23,11 @@ class CreateProductsTable extends Migration
             $table->text('p_description')->nullable();
             $table->integer('p_price')->default(0);
             $table->integer('p_view')->default(0);
+            $table->integer('p_pay')->default(0);
             $table->tinyInteger('p_active')->default(1);
             $table->tinyInteger('p_hot')->default(0);
             $table->integer('p_inventory')->default(0);
-            $table->unsignedBigInteger('p_brand_id');
+            $table->unsignedBigInteger('p_brand_id')->nullable();
             $table->unsignedBigInteger('p_category_id');
             $table->unsignedBigInteger('p_discount_id')->nullable();
             $table->unsignedBigInteger('p_tag_id')->nullable();

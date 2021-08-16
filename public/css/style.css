@@ -1401,7 +1401,7 @@ img.alignright{
 }
 .cart-block .cart-block-content  .product-info .p-left .remove_link:after{
 	content: '';
-	background: url("images/delete_icon.png?v=37") no-repeat center center;
+	background: url("../images/delete_icon.png?v=37") no-repeat center center;
 	font-size: 0;
 	height: 9px;
 	width: 9px;

@@ -17,10 +17,10 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->string('pay_name')->unique();
             $table->string('pay_slug');
-            $table->integer('pay_name_account')->nullable();
-            $table->integer('pay_num_account')->nullable();
-            $table->integer('pay_fee_shipping')->nullable();
-            $table->integer('pay_description_account')->nullable();
+            $table->string('pay_name_account')->nullable();
+            $table->string('pay_num_account')->nullable();
+            $table->integer('pay_fee_shipping')->default(0);
+            $table->text('pay_description_account')->nullable();
             $table->tinyInteger('pay_active')->default(1);
             $table->timestamps();
         });

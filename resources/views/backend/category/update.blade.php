@@ -62,7 +62,7 @@
             <label for="exampleFormControlFile1">Banner</label>
             <input type="file" class="form-control-file" id="exampleFormControlFile1" name="c_banner">
             @if($category->c_banner)
-            <img src="{{asset('images/icon\/')}}{{$category->c_banner}}" style="width:150px; height:auto" alt="">
+            <img src="{{asset('images/banner\/')}}{{$category->c_banner}}" style="width:150px; height:auto" alt="">
             @endif
         </div>
    </div>

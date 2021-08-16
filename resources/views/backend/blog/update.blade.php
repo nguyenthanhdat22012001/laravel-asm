@@ -73,8 +73,7 @@
                     <textarea class="form-control" id="bl_description_short" rows="3" name="bl_description_short">{{ old('bl_description_short',$blog->bl_description_short)}}</textarea>
                     <script>
                         CKEDITOR.replace( 'bl_description_short',{
-                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                            filebrowserUploadMethod: 'form'
+                      
                         });
                         
                     </script>
@@ -84,8 +83,7 @@
                     <textarea class="form-control" id="bl_description" rows="3" name="bl_description">{{ old('bl_description',$blog->bl_description)}}</textarea>
                     <script>
                         CKEDITOR.replace( 'bl_description',{
-                            filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
-                            filebrowserUploadMethod: 'form'
+                        
                         });
                         
                     </script>

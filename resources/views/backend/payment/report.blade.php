@@ -13,8 +13,8 @@
                 <strong>{{ $message }}</strong>
             </div>
  @endif
- @if ($errors->first('t_name'))
+ @if ($errors->first('pay_name'))
     <div class="alert alert-dismissible fade show alert-danger" role="alert">
-             {{$errors->first('t_name')	}}
+             {{$errors->first('pay_name')	}}
 	</div>
 @endif

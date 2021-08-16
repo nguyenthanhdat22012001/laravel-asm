@@ -26,7 +26,7 @@ class paymentController extends Controller
 
     function store(paymentRequest $request){
        $data = $request->except(['_tokent']);
-       $data['pay_slug'] = Str::slug($request->c_name);
+       $data['pay_slug'] = Str::slug($request->pay_name);
        $data['created_at']  = Carbon::now();
 
        if ($request->has('pay_active')) {
@@ -54,7 +54,7 @@ class paymentController extends Controller
 
     function update(paymentRequest $request , $id){
         $data = $request->except(['_tokent']);
-        $data['pay_slug'] = Str::slug($request->c_name);
+        $data['pay_slug'] = Str::slug($request->pay_name);
         $data['created_at']  = Carbon::now();
  
         if ($request->has('pay_active')) {

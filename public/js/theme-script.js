@@ -1,26 +1,28 @@
+
 (function ($) {
     "use strict"; // Start of use strict
     /* ---------------------------------------------
      Scripts initialization
      --------------------------------------------- */
     $(document).ready(function () {
-        $('.add-to-car').click(function () {
-            var variant_id = $(this).attr('data-variantid');
-            var quantity = 1;//$('input[type="number"]').val();
-            var params = {
-                type: 'POST',
-                url: '/cart/add.js',
-                data: 'quantity=' + quantity + '&id=' + variant_id,
-                dataType: 'json',
-                success: function (line_item) {
-                    window.location.href = '/cart';
-                },
-                error: function (XMLHttpRequest, textStatus) {
-                    Haravan.onError(XMLHttpRequest, textStatus);
-                }
-            };
-            jQuery.ajax(params);
-        });
+       
+        // $('.add-to-car').click(function () {
+        //     var variant_id = $(this).attr('data-variantid');
+        //     var quantity = 1;//$('input[type="number"]').val();
+        //     var params = {
+        //         type: 'POST',
+        //         url: '/cart/add.js',
+        //         data: 'quantity=' + quantity + '&id=' + variant_id,
+        //         dataType: 'json',
+        //         success: function (line_item) {
+        //             window.location.href = '/cart';
+        //         },
+        //         error: function (XMLHttpRequest, textStatus) {
+        //             Haravan.onError(XMLHttpRequest, textStatus);
+        //         }
+        //     };
+        //     jQuery.ajax(params);
+        // });
     });
     $(window).load(function () {
         // auto width megamenu
@@ -337,12 +339,12 @@
         }
         /* Main menu on top */
         var h = $(window).scrollTop();
-        var max_h = $('#header').height() + $('#top-banner').height();
+        var max_h = $('#header').height() + $('#top-banner').height() + 150;
         var width = $(window).width();
         var vertical_menu_height = $('#nav-top-menu').height();
         //console.log(vertical_menu_height);
         if (width > 767) {
-            console.log('height='+h+'max-height='+max_h+'height-menu='+vertical_menu_height)
+            //console.log('height='+h+'max-height='+max_h+'height-menu='+vertical_menu_height)
             if (h > (max_h + vertical_menu_height) - 50) {
                 // fix top menu
                 $('#nav-top-menu').addClass('nav-ontop');

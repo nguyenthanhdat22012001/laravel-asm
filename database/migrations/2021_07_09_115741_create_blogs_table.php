@@ -22,12 +22,13 @@ class CreateBlogsTable extends Migration
             $table->text('bl_description')->nullable();
             $table->integer('bl_view')->default(0);
             $table->tinyInteger('bl_active')->default(1);
+            $table->tinyInteger('bl_hot')->default(0);
             $table->unsignedBigInteger('bl_categoryBlog_id');
             $table->unsignedBigInteger('bl_admin_id')->nullable();
             $table->timestamps();  
 
         });
-        Schema::table('categories', function($table)
+        Schema::table('blogs', function($table)
         {
             $table->foreign('bl_categoryBlog_id')->references('id')->on('category_blogs');
         });
